@@ -5,7 +5,7 @@ const index = async({request, response, render, session}) => {
   data.list = await exampleService.list()
   data.time = new Date().toISOString()
   await exampleService.add(data.time)
-  render('index.ejs', { data: data })
+  render('index.ejs', { data })
 }
 
 export { index }

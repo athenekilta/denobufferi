@@ -1,0 +1,10 @@
+<%- include('./partials/header.ejs') %>
+<p>
+  <%= data.time %>
+</p>
+<ol>
+  <% data.list.forEach((time) => { %>
+    <li><%= time %></li>
+  <% }) %>
+</ol>
+<%- include('./partials/footer.ejs') %>

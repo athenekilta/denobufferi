@@ -1,10 +1,7 @@
 <%- include('./partials/header.ejs') %>
-<p>
-  <%= data.time %>
-</p>
 <ol>
-  <% data.list.forEach((time) => { %>
-    <li><%= time %></li>
+  <% data.list.forEach((row) => { %>
+    <li><%= new Date(row.timestamp).toLocaleString() %></li>
   <% }) %>
 </ol>
 <%- include('./partials/footer.ejs') %>

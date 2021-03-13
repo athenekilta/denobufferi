@@ -1,34 +1,44 @@
 import { DB } from "../deps.js";
 import { config } from "../config/config.js";
 
-// const connectionPool = new Pool(config.database, 2);
-
-// const executeQuery = async(query, ...params) => {
-//   const client = await connectionPool.connect();
-//   const start = Date.now();
-//   try {
-//       return await client.query(query, ...params);
-//   } catch (e) {
-//       console.log(e);  
-//   } finally {
-//       client.release();
-//       const ms = Date.now() - start;
-//       console.log(`(${ms} ms) ${query} [${[ ...params ]}]`)
-//   }
-  
-//   return null;
-// };
-
 const db = new DB(config.database);
 
-const exists = [...await db.query("SELECT name FROM sqlite_master WHERE type='table' AND name='times';")][0]
-if(!exists){
-    console.log("Initializing database")
-    db.query("CREATE TABLE times ( id SERIAL PRIMARY KEY, time TEXT NOT NULL );")
-}
+[ // Database initialization
+  `CREATE TABLE IF NOT EXISTS customer (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    timestamp INTEGER NOT NULL,
+    security INTEGER,
+    pin_code TEXT,
+    tg_2fa TEXT,
+    deleted INTEGER
+  )`,
+  `CREATE TABLE IF NOT EXISTS event (
+    id INTEGER PRIMARY KEY,
+    timestamp INTEGER NOT NULL,
+    mp_id TEXT,
+    price INTEGER,
+    quantity INTEGER,
+    customer_id INTEGER,
+    product_id INTEGER,
+    FOREIGN KEY (customer_id) REFERENCES customer (id),
+    FOREIGN KEY (product_id) REFERENCES product (id)
+  )`,
+  `CREATE TABLE IF NOT EXISTS product (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    price INTEGER,
+    qty INTEGER DEFAULT 0,
+    deleted INTEGER
+  )`,
+  `CREATE TABLE IF NOT EXISTS config (
+    key TEXT UNIQUE,
+    value TEXT
+  )`
+].forEach((q) => { db.query(q) })
 
 const executeQuery = async(query, ...params) => {
-    return [...await db.query(query, ...params )]
+  return [...await db.query(query, ...params ).asObjects()]
 }
 
 export { executeQuery };

@@ -16,6 +16,7 @@ const db = new DB(config.database);
   `CREATE TABLE IF NOT EXISTS event (
     id INTEGER PRIMARY KEY,
     timestamp INTEGER NOT NULL,
+    type INTEGER,
     mp_id TEXT,
     price INTEGER,
     quantity INTEGER,

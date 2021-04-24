@@ -1,7 +1,7 @@
 import * as exampleService from '../../services/exampleService.js'
 
 const app = async({ render }) => {
-  render('index.ejs')
+  render('app.ejs')
 }
 
-export { index }
+export { app }

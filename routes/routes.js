@@ -4,6 +4,6 @@ import * as app from "./controllers/appController.js"
 const router = new Router()
 
 router
-.get('/', app.index)
+.get('/', app.app)
 
 export { router }

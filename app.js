@@ -27,5 +27,7 @@ app.use(router.routes());
 if (!Deno.env.get('TEST_ENVIRONMENT')) {
   app.listen({ port: config.port });
 }
+
+console.log(`Running on http://localhost:${config.port}`)
   
 export default app;

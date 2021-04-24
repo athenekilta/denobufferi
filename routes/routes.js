@@ -1,9 +1,9 @@
 import { Router } from "../deps.js";
-import * as example from "./controllers/exampleController.js"
+import * as app from "./controllers/appController.js"
 
 const router = new Router()
 
 router
-.get('/', example.index)
+.get('/', app.index)
 
 export { router }

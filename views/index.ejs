@@ -1,7 +1,15 @@
-<%- include('./partials/header.ejs') %>
-<ol>
-  <% data.list.forEach((row) => { %>
-    <li><%= new Date(row.timestamp).toLocaleString() %></li>
-  <% }) %>
-</ol>
-<%- include('./partials/footer.ejs') %>
+<!doctype html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <script src="https://unpkg.com/vue@next"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+</head>
+<body>
+  <div id="app">
+  </div>
+</body>
+</html>
